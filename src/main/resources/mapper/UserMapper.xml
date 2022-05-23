@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.song.book_of_friends.mapper.UserMapper">
+    <resultMap id="userMap" type="com.song.book_of_friends.pojo.User">
+        <id column="id" property="uid"></id>
+        <result column="username" property="username"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="favorite_food" property="favoriteFood"></result>
+        <result column="favorite_animal" property="favoriteAnimal"></result>
+        <result column="comment" property="comment"></result>
+    </resultMap>
+    <select id="getAllUsers" resultMap="userMap">
+        select id, username, birthday, favorite_food, favorite_animal, comment from users;
+    </select>
+    <delete id="deleteUser" parameterType="java.lang.Integer" >
+        delete from users where id = #{uid}
+    </delete>
+    <insert id="addUser" parameterType="com.song.book_of_friends.vo.UserReqBody">
+        insert into users(username, birthday, favorite_food, favorite_animal, comment)
+        values(#{username}, #{birthday}, #{favoriteFood}, #{favoriteAnimal}, #{comment})
+    </insert>
+</mapper>
